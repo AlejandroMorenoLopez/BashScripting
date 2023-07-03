@@ -1,0 +1,84 @@
+#!/bin/bash
+
+#Colors and styles
+#this will implement the colors and we can use them in echo using -e
+blackNormal="\e[0;30;30m"
+blackBold="\e[0;30m\e[1m"
+blackItalics="\e[0;30m\e[3m"
+blackUnderlined="\e[0;30m\e[4m"
+
+blueNormal="\e[0;34m"
+blueBold="\e[0;34m\e[1m"
+blueItalics="\e[0;34m\e[3m"
+blueUnderlined="\e[0;34m\e[4m"
+
+cyanNormal="\e[0;36m"
+cyanBold="\e[0;36m\e[1m"
+cyanItalics="\e[0;36m\e[3m"
+cyanUnderlined="\e[0;36m\e[4m"
+
+yellowNormal="\e[0;33m"
+yellowBold="\e[0;33m\e[1m"
+yellowItalics="\e[0;33m\e[3m"
+yellowUnderlined="\e[0;33m\e[4m"
+
+greenNormal="\e[0;32m"
+greenBold="\e[0;32m\e[1m"
+greenItalics="\e[0;32m\e[3m"
+greenUnderlined="\e[0;32m\e[4m"
+
+redNormal="\e[1;31m"
+redBold="\e[1;31m\e[1m"
+redItalics="\e[1;31m\e[3m"
+redUnderlined="\e[1;31m\e[4m"
+
+purpleNormal="\e[0;35m"
+purpleBold="\e[0;35m\e[1m"
+purpleItalics="\e[0;35m\e[3m"
+purpleUnderlined="\e[0;35m\e[4m"
+
+grayNormal="\e[0:37m"
+grayBold="\e[0;37m\e[1m"
+grayItalics="\e[0;37m\e[3m"
+grayUnderlined="\e[0;37m\e[4m"
+
+Reset="\e[0m"
+
+#function for CTR+C will print quitting
+function CTRL_C(){
+  #this echo line using -e will enable the backlash characters \n\t
+  echo -e "\n\tCTRL + C Quitting..."
+}
+
+function helpMenu(){
+  #implementing the colors using the color and then reset to close and use normal color
+  echo -e "\t${backBod}[*]${Reset}${grayBold}This is the Help Menu${Reset}"
+}
+
+function varA(){
+  echo -e "\tThis is the parameter for a: $param"
+}
+
+#declares a variable type int and set it to 0
+declare -i option=0
+
+#Will look for the INT (ctrl+c) keys and use the function CTR+C
+trap CTRL_C INT
+
+#lets handle commandline options (in this case h and a, also a expects an argument
+#a: and h doesn't) 
+while getopts 'ha:' arg;do
+#case will handle the options set varibles using $OPTARGS to handle the parameter and use it
+#on functions 
+#variable option will handle which function to call
+  case $arg in
+    h) ;;
+    a) let option+=1;param=$OPTARG;;
+  esac
+done
+#this loop will manage using the variable Option what function will be called
+if [ "$option" -eq 1 ];then
+  varA
+else
+  helpMenu
+fi
