@@ -97,3 +97,12 @@ We can use
 , a list of values
 Examples:
 * */2 * * 1 – this means every minute, every 2 hrs on Monday
+
+Directories
+if we switch to a directory and we need to go bakc quickly
+   
+going into the path:
+/usr/share/seclists/Passwords/BiblePass
+we use pushd
+and this will remember that path
+then if we use popd - we will go back to that directory
