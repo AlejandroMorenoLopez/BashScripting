@@ -1,0 +1,99 @@
+Basic Commands - Linux
+
+Command	Arguments	            Description
+awk	    ‘{print $1}’	        This will print the first field with a delimiter of one space, $1 in this case will print the first field we can change this 2, 3…
+	      ‘{print $1,$7}’	      You can show many fields just separated by a , and when shows awk will add a space between fields to differentiate them
+	      -F ‘delimiter’	      Usually, awk will use a space for delimiter using -F delimiter
+                              Will change this to whatever is between ‘’ right after the argument
+                              Example:  awk -F ‘:’ {print $1}
+	      ‘NF{print $NF}’	      This will print always the last field 
+		
+cut	    -b bytes to show	    This will extract specific bytes
+                              Example: cut -b 1,2,3 
+                              Will show only the first 3 characters on each line
+                              bytes to show : Using 1- will indicate from 1st byte to the end
+                              Using -5 will indicate from 1st to the 5th character
+                              To show only a segment we can use the 3-5 this
+                              Means from byte 3 to 5
+	      -d ´delimiter’	      Will use as a delimiter and then we can apply the field argument
+	      -f ´field number’	    To cut by field number (by default will use tabs as delimiter)
+                              Example: cut -d ‘:’ -f 2  this will use : as delimiter and show the 2nd field
+		
+grep 	  grep ‘pattern’	      Will look into the stdout or file and show the line that has the pattern
+	      -n	                  Will show the line number in which the pattern was find
+                              Example: grep ‘test’ -n
+	      -v	                  Will show all rows where the pattern was NOT found ( inverse of the normal grep )
+                              Example: grep ‘test’ -v
+	      -i	                  Ignore case matching
+                              Example: grep ‘Net’ -i (will look for Net, net)
+	      -A                    number	Adds rows the number after the argument where the patter is found
+                              Example: grep ‘Net’ -A 2
+                              Will look for the pattern Net and where it found it will show the next 2 rows after it 
+	      -B                    number	Adds rows the number before the argument where the patter is found
+                              Example: grep ‘Net’ -B 3
+                              Will look for the pattern Net and where it found it will show the next 3 rows before it
+	      -C                    number	Adds rows the number before and after the argument where the patter is found
+                              Example: grep ‘Net’ -C 2
+                              Will look for the pattern Net and where it found it will show the next 3 rows before and after it
+sed	   ‘s/string1/string2’	  Replace the string 1 for the string 2 but only the first time in each row 
+	     ‘s/string1/string2/g’	Replace each string1 for string 2 
+	     ‘/Replace/s/net/Net’	  Will search every line starting with the string Replace, -s will substitute net for Net but only once, add the /g to make it global 
+	     ‘/pattern/d’	          Search for a pattern and delete the line that has it
+	     ‘s/pattern//g’	        This will search for the patters and erase it globally
+		
+command	& 	                  Will make the process run into background
+	      & disown	            Will make it run and not link it to the terminal
+		
+command	>/dev/null	          Send the stdout to /dev/null where will it be lost and wont show
+	      2>/dev/null	          Send the stderr and disappear
+	      &>/dev/null	          Send both stderr and stdout to /dev/null
+		
+exec	  3<>                   file	Will create a file descriptor for stdin and stdout and will store it on the file
+	      3>&-	                Close the 3 descriptor
+	      3>&4	                Descriptor 3 will be a copy of descriptor 4
+	      3>$4-	                Descriptor 3 will be a copy of descriptor 4 and close descriptor 4
+	      3>&1 1>&2 2>&3	      Swapt stdout to stderr
+ls -l /proc/$$/fd	            Will show a list of the descriptors that are open currently
+		
+bc		                        This is the bash calculator
+                              By itself can act like a calculator but it can be used on a line basis
+	                            Echo $’(2*4)’	Will echo the multiply to 2*4
+			
+Permissions
+
+If we do chmod and assign +t (chmod +t file/directory or chmod 1777 file/directory) we are configuring the sticky bit (the permissions will look something like this rwxrwxrwt and the value will be 1777), this means this file can only be deleted by owner or root
+lsattr -  will list the special flags set with chattr (i, C, etc)
+chattr- changes accordingly the advanced permissions to a file (+I, -i…)
+A	disable date modification
+c	the file will be compressed by the kernel automatically
+i	block modifications or deleting of the file
+u	allow recovery of file when deleted
+e	will zero al blocks, contrary to u we won’t be able to recover it
+
+SGID
+
+To activate we can use:
+chmod g+s file
+chmod 2*** file
+and we can identify them on the group part we will see:
+S when it doesn’t have execution permissions and s when it has them
+
+SUID
+
+Will allow us to execute the program as owner or root 
+To activate we use:
+chmod u+s file
+chmod 4*** file 
+
+CROB TASKS
+
+Execution of instructions by schedule we set
+We will use * * * * *, that means:
+Minutes (0-59), Hours(0-23), day of the month(1-31), month(1-12), day of the week(0-6 starting on sunday)
+We can use 
+* all values
+- from to
+/ every
+, a list of values
+Examples:
+* */2 * * 1 – this means every minute, every 2 hrs on Monday
