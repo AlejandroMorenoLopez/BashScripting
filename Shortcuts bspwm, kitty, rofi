@@ -1,0 +1,22 @@
+Shortcuts
+
+SHORTCUT	DESCRIPTION	
+Win Key + Enter                                           	Open New Terminal Window	            Bspwm
+Win Key + q                                                 Closes Terminal Window	              Bspwm
+Win Key + 1 2 3 ...                                        	Go to that Desktop	                  Bspwm
+Win Key + Shift + 1 2 3...                             	    Send windows to that Desktop	        Bspwm
+Ctrl + Alt + Win Key + Arrow Key                	          Windows Placing	                      Bspwm
+Ctrl + Alt + Win Key + Arrow Key + Space  	                Cancel Windows Placing 	              Bspwm
+Win Key + s                                                 Make that Windows Floating	          Bspwm
+Win Key + t                                                 Anker window that was floating	      Bspwm
+Win Key + Shift + arrow                               	    Swap terminal windows	                Bspwm
+Win Key + d                                                 Open rofi	                            Rofi
+Ctrl + Shift + Enter                                       	Open New Windows (Kitty)	            Kitty
+Ctrl + Shift + w                                            Close one window at the time		      Kitty
+Ctrl + Shift + t	                                          New Tab	                              Kitty
+Ctrl + Alt + Shift + t	                                    Set Tab Name	                        Kitty
+Ctrl + Shift + q	                                          Closes Tab	                          Kitty
+Ctrl + Shift + .	                                          Moves Tab forward	                    Kitty
+Ctrl + Shift + ,	                                          Moves Tab Backwards	                  Kitty
+Ctrl + Shift + r	                                          Resize 	                              Kitty
+
