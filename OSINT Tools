@@ -1,3 +1,7 @@
 OSINT Tools
 
+host WEBSITE              DNS
+whatweb WEBSITE
 https://wigle.net/        WIFI 
+https://www.exploit-db.com/google-hacking-database
+https://dnsdumpster.com/
